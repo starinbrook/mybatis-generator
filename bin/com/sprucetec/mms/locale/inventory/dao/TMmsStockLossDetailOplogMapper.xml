@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sprucetec.mms.locale.inventory.dao.TMmsStockLossDetailOplogMapper" >
+  <resultMap id="BaseResultMap" type="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="city_id" property="cityId" jdbcType="BIGINT" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="BIGINT" />
+    <result column="stock_code" property="stockCode" jdbcType="VARCHAR" />
+    <result column="sku_id" property="skuId" jdbcType="BIGINT" />
+    <result column="loss_pay_code" property="lossPayCode" jdbcType="VARCHAR" />
+    <result column="op_type" property="opType" jdbcType="TINYINT" />
+    <result column="c_t" property="cT" jdbcType="BIGINT" />
+    <result column="creater_id" property="createrId" jdbcType="BIGINT" />
+    <result column="creater_name" property="createrName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, city_id, warehouse_id, stock_code, sku_id, loss_pay_code, op_type, c_t, creater_id, 
+    creater_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_mms_stock_loss_detail_oplog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_mms_stock_loss_detail_oplog
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from t_mms_stock_loss_detail_oplog
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplogExample" >
+    delete from t_mms_stock_loss_detail_oplog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplog" >
+    insert into t_mms_stock_loss_detail_oplog (id, city_id, warehouse_id, 
+      stock_code, sku_id, loss_pay_code, 
+      op_type, c_t, creater_id, 
+      creater_name)
+    values (#{id,jdbcType=BIGINT}, #{cityId,jdbcType=BIGINT}, #{warehouseId,jdbcType=BIGINT}, 
+      #{stockCode,jdbcType=VARCHAR}, #{skuId,jdbcType=BIGINT}, #{lossPayCode,jdbcType=VARCHAR}, 
+      #{opType,jdbcType=TINYINT}, #{cT,jdbcType=BIGINT}, #{createrId,jdbcType=BIGINT}, 
+      #{createrName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplog" >
+    insert into t_mms_stock_loss_detail_oplog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="warehouseId != null" >
+        warehouse_id,
+      </if>
+      <if test="stockCode != null" >
+        stock_code,
+      </if>
+      <if test="skuId != null" >
+        sku_id,
+      </if>
+      <if test="lossPayCode != null" >
+        loss_pay_code,
+      </if>
+      <if test="opType != null" >
+        op_type,
+      </if>
+      <if test="cT != null" >
+        c_t,
+      </if>
+      <if test="createrId != null" >
+        creater_id,
+      </if>
+      <if test="createrName != null" >
+        creater_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="stockCode != null" >
+        #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="lossPayCode != null" >
+        #{lossPayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null" >
+        #{opType,jdbcType=TINYINT},
+      </if>
+      <if test="cT != null" >
+        #{cT,jdbcType=BIGINT},
+      </if>
+      <if test="createrId != null" >
+        #{createrId,jdbcType=BIGINT},
+      </if>
+      <if test="createrName != null" >
+        #{createrName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplogExample" resultType="java.lang.Integer" >
+    select count(*) from t_mms_stock_loss_detail_oplog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_mms_stock_loss_detail_oplog
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=BIGINT},
+      </if>
+      <if test="record.warehouseId != null" >
+        warehouse_id = #{record.warehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="record.stockCode != null" >
+        stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.skuId != null" >
+        sku_id = #{record.skuId,jdbcType=BIGINT},
+      </if>
+      <if test="record.lossPayCode != null" >
+        loss_pay_code = #{record.lossPayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.opType != null" >
+        op_type = #{record.opType,jdbcType=TINYINT},
+      </if>
+      <if test="record.cT != null" >
+        c_t = #{record.cT,jdbcType=BIGINT},
+      </if>
+      <if test="record.createrId != null" >
+        creater_id = #{record.createrId,jdbcType=BIGINT},
+      </if>
+      <if test="record.createrName != null" >
+        creater_name = #{record.createrName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_mms_stock_loss_detail_oplog
+    set id = #{record.id,jdbcType=BIGINT},
+      city_id = #{record.cityId,jdbcType=BIGINT},
+      warehouse_id = #{record.warehouseId,jdbcType=BIGINT},
+      stock_code = #{record.stockCode,jdbcType=VARCHAR},
+      sku_id = #{record.skuId,jdbcType=BIGINT},
+      loss_pay_code = #{record.lossPayCode,jdbcType=VARCHAR},
+      op_type = #{record.opType,jdbcType=TINYINT},
+      c_t = #{record.cT,jdbcType=BIGINT},
+      creater_id = #{record.createrId,jdbcType=BIGINT},
+      creater_name = #{record.createrName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplog" >
+    update t_mms_stock_loss_detail_oplog
+    <set >
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="warehouseId != null" >
+        warehouse_id = #{warehouseId,jdbcType=BIGINT},
+      </if>
+      <if test="stockCode != null" >
+        stock_code = #{stockCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null" >
+        sku_id = #{skuId,jdbcType=BIGINT},
+      </if>
+      <if test="lossPayCode != null" >
+        loss_pay_code = #{lossPayCode,jdbcType=VARCHAR},
+      </if>
+      <if test="opType != null" >
+        op_type = #{opType,jdbcType=TINYINT},
+      </if>
+      <if test="cT != null" >
+        c_t = #{cT,jdbcType=BIGINT},
+      </if>
+      <if test="createrId != null" >
+        creater_id = #{createrId,jdbcType=BIGINT},
+      </if>
+      <if test="createrName != null" >
+        creater_name = #{createrName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sprucetec.mms.locale.inventory.entity.TMmsStockLossDetailOplog" >
+    update t_mms_stock_loss_detail_oplog
+    set city_id = #{cityId,jdbcType=BIGINT},
+      warehouse_id = #{warehouseId,jdbcType=BIGINT},
+      stock_code = #{stockCode,jdbcType=VARCHAR},
+      sku_id = #{skuId,jdbcType=BIGINT},
+      loss_pay_code = #{lossPayCode,jdbcType=VARCHAR},
+      op_type = #{opType,jdbcType=TINYINT},
+      c_t = #{cT,jdbcType=BIGINT},
+      creater_id = #{createrId,jdbcType=BIGINT},
+      creater_name = #{createrName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
